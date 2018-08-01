@@ -1,3 +1,4 @@
 conf.js
 node_modules
 dump.rdb
+/public/build.js

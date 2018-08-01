@@ -49,7 +49,7 @@
 					<p class='stat-key'>season</p>
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
-					<p class='stat-val' :class="draftStatusClass()">{{ draftStatus }}</p>
+					<p class='stat-val' :class="draftStatusClass">{{ draftStatus }}</p>
 					<p class='stat-key'>draft status</p>
 				</div>
 			</div>
@@ -118,12 +118,6 @@ export default {
 			} else {
 				return '-'
 			}
-		}
-	},
-	methods: {
-		updateLeague() {
-			console.log('updateLeague!')
-			this.modalOpen = false
 		},
 		draftStatusClass() {
 			return {
@@ -131,11 +125,12 @@ export default {
 				'has-text-success': this.draftStatus === 'Live',
 				'has-text-info': this.draftStatus === 'Post'
 			}
-		},
-		leagueImgError() {
-			//console.log(this.$refs)
-      this.$refs.leaguelogo.src = 'http://placehold.it/300x225'
-    }
+		}
+	},
+	methods: {
+		updateLeague() {
+			this.modalOpen = false
+		}
 	}
 }
 </script>

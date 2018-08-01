@@ -115,10 +115,10 @@ const store = new Vuex.Store({
 						}
 					}
 				})
-				console.log('Total Picks', totalPicks)
+				/*console.log('Total Picks', totalPicks)
 				console.log('Total Rounds', totalRounds)
 				console.log('Overall Pick', overallPick)
-				console.log('Current Round', currentRound)
+				console.log('Current Round', currentRound)*/
 				console.timeEnd('Draft Results: Matching Player Keys')
 
 				commit('setDraftResults', {
