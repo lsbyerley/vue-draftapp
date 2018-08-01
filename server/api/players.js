@@ -50,10 +50,11 @@ router.get('/players/:update?/:total?', (req, res) => {
 							let players = data[0].players;
 							players.forEach((player) => {
 								//console.log(player)
-								let hsurl = player.headshot.url
-								let splits = hsurl.split('-/')
+								let hsUrl = player.headshot.url
+								let hsUrlx2
+								let splits = hsUrl.split('-/')
 								if (splits && splits.length == 2) {
-									hsurl = splits[1]
+									hsUrlx2 = splits[1]
 								}
 								playersCollection.push({
 									player_key: player.player_key,
@@ -62,7 +63,8 @@ router.get('/players/:update?/:total?', (req, res) => {
 									position: player.display_position,
 									team: player.editorial_team_full_name,
 									team_abbrev: player.editorial_team_abbr,
-									headshot: hsurl
+									headshot: hsUrl,
+									headshotx2: hsUrlx2
 								});
 							});
 

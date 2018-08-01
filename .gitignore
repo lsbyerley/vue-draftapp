@@ -1,6 +1,6 @@
 conf.js
 dump.rdb
-/public/build.js
+public/build.js
 
 .DS_Store
 node_modules/
