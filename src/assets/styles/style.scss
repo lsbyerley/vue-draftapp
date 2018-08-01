@@ -1,0 +1,46 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+//Any customizations go here
+
+// Import Bulma
+@import "~bulma";
+
+body {
+	background: #F5F7FA
+}
+
+.draftroom, .rankings {
+	.title {
+		background: #eee;
+		margin-bottom: .5rem;
+		padding: 5px;
+		text-align: center;
+	}
+	.subtitle {
+		margin-bottom: .5rem;
+		text-align: center;
+	}
+	.level {
+		border-top: 1px solid #ddd;
+	  margin: 0;
+	  font-size: 13px;
+	  padding: 2px 0 2px 5px;
+
+		&.ranking.is-grey {
+			background: #f5f5f5;
+		}
+		&.ranking.is-green {
+			background: #dff0d8;
+		}
+		&.ranking.is-yellow {
+			background: #fcf8e3;
+		}
+		&.ranking.is-blue {
+			background: #d9edf7;
+		}
+		&.draft-pick:nth-child(odd) {
+			background: #f9f9f9;
+		}
+	}
+}
