@@ -5,16 +5,9 @@ import find from 'lodash/find'
 import concat from 'lodash/concat'
 import orderBy from 'lodash/orderBy'
 import forEach from 'lodash/forEach'
+import { insertPlayerNote, insertPlayerProjections } from './utils/util'
 
 Vue.use(Vuex)
-
-/*axios.interceptors.request.use((res) => {
-	console.log(res)
-	return res
-}, (err) => {
-	console.log(err.response.status)
-	return err
-})*/
 
 const store = new Vuex.Store({
 	state: {
@@ -45,6 +38,10 @@ const store = new Vuex.Store({
 		playerPool: {
 			isFetching: false,
 			data:[]
+		},
+		projections: {
+			isFetching: false,
+			data: []
 		}
 	},
 	actions: {
@@ -98,7 +95,6 @@ const store = new Vuex.Store({
 				console.time('Draft Results: Matching Player Keys')
 				forEach(draftResults, (result, i) => {
 					if (typeof result.player_key !== undefined) {
-
 						let player = find(state.playerPool.data, (p) => {
 							return result.player_key === p.player_key
 						})
@@ -110,8 +106,6 @@ const store = new Vuex.Store({
 							currentRound = (draftResults[i+1] != null) ? draftResults[i+1].round : draftResults[i].round
 							currentPick = (draftResults[i+1] != null) ? draftResults[i+1].pick : draftResults[i].pick
 							currentPick = (currentPick % 12 === 0) ? 12 : (currentPick % 12)
-						} else {
-							//console.log('pick not found', result)
 						}
 					}
 				})
@@ -151,12 +145,15 @@ const store = new Vuex.Store({
 				console.time("Player Rankings: Adding Yahoo Player Key");
 				let foundCount = 0
 				let rankings = forEach(res.data.rankings, (ranking) => {
+
 					if (ranking.name === 'Mitch Trubisky') //dumb name hack
 						ranking.name = 'Mitchell Trubisky'
+
 					let regex = RegExp(`${ranking.name}.*`,`i`)
 					forEach(state.playerPool.data, (yPlayer) => {
 						const yPlayerName = yPlayer.name
 						let found
+
 						if (ranking.position === 'DST') {
 							regex = RegExp(`${yPlayerName}.*`,`i`)
 							found = regex.test(ranking.name)
@@ -167,9 +164,13 @@ const store = new Vuex.Store({
 						if (found && (ranking.position === yPlayer.position || ranking.position === 'DST')) {
 							foundCount += 1
 							ranking.yahooPlayerKey = yPlayer.player_key
+							ranking.team = yPlayer.team
+							ranking = insertPlayerNote(ranking)
+							ranking = insertPlayerProjections(ranking, state.projections.data)
 							return false;
 						}
 					})
+
 				})
 				console.log('found count:'+foundCount)
 				console.timeEnd("Player Rankings: Adding Yahoo Player Key");
@@ -196,6 +197,19 @@ const store = new Vuex.Store({
 				console.error(err);
         commit('setFetchingNews', { isFetching: false });
 			}
+		},
+		async getProjections({ commit }, payload) {
+			commit('setFetchingProjections', { isFetching: true });
+
+			try {
+			  const res = await axios.get('/api/projections')
+			  commit('setProjections', { projections: res.data });
+			  commit('setFetchingProjections', { isFetching: false });
+
+			} catch (err) {
+			  console.error(err);
+			  commit('setFetchingProjections', { isFetching: false });
+			}
 		}
 	},
 	mutations: {
@@ -204,6 +218,12 @@ const store = new Vuex.Store({
 		},
 		setFetchingNews(state, payload) {
 			Vue.set(state.news, 'isFetching', payload.isFetching)
+		},
+		setProjections(state, payload) {
+		  Vue.set(state.projections, 'data', payload.projections)
+		},
+		setFetchingProjections(state, payload) {
+		  Vue.set(state.projections, 'isFetching', payload.isFetching)
 		},
 		setAuthModal(state, payload) {
 			Vue.set(state, 'authModalOpen', payload.open)

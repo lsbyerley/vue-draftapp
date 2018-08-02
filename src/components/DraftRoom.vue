@@ -56,6 +56,10 @@
 								<div class="level-item">Tier {{ p.tier }}</div>
 								<div class="level-item">{{ p.name }}</div>
 							</div>
+							<div class="level-right">
+								<div class="level-item" v-if="p.note">{{ p.note }}</div>
+								<div class="level-item" v-if="p.floor">FL: {{ p.floor }}</div>
+							</div>
 						</div>
 					</div>
 					<div class='column is-half'>
@@ -197,7 +201,7 @@ export default {
 		shouldWePoll() {
 			const draftStatus = this.draftStatus
 			if (draftStatus === 'predraft' || draftStatus === 'draft') {
-				this.pollInterval = (draftStatus === 'predraft') ? 30000 : 15000 // 1minute
+				this.pollInterval = (draftStatus === 'predraft') ? 15000 : 5000 // 30sec or 5sec
 				if (!this.timer) {
 					this.isPolling = true
 					this.timer = setInterval(() => {

@@ -41,6 +41,7 @@ export default {
 			console.time('App Init')
 			await this.$store.dispatch('getLeague');
 			await this.$store.dispatch('getNews');
+			await this.$store.dispatch('getProjections');
 			await this.$store.dispatch('getPlayerPool');
 			await this.$store.dispatch('getDraftResults');
 			await this.$store.dispatch('getPlayerRankings');

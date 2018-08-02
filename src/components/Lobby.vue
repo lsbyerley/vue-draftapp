@@ -15,8 +15,9 @@
 		<div class="column is-4">
 			<div class='box articles'>
 				<h1 class="title is-4">Note Worthy Articles</h1>
-				<a target="_blank" href="https://www.fantasypros.com/2018/07/the-running-back-super-chart-2018-fantasy-football/">RB Super Chart 2018</a>
-				<a target="_blank" href="https://www.profootballfocus.com/news/pro-nfl-offensive-line-rankings-all-32-teams-units-entering-2018">Offensive Line Rankings</a>
+				<div v-for="a in articles">
+					<a target="_blank" :href="a.link">{{ a.title }}</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -30,7 +31,20 @@ export default {
 	name: 'Lobby',
 	data() {
 		return {
-			msg: 'WELCOME TO DRAFT APP'
+			articles: [
+				{
+					title: 'RB Super Chart 2018',
+					link: 'https://www.fantasypros.com/2018/07/the-running-back-super-chart-2018-fantasy-football'
+				},
+				{
+					title: 'Offensive Line Rankings',
+					link: 'https://www.profootballfocus.com/news/pro-nfl-offensive-line-rankings-all-32-teams-units-entering-2018'
+				},
+				{
+					title: 'RBs helped/hurt by OLine',
+					link: 'https://www.profootballfocus.com/news/fantasy-football-running-backs-most-helped-and-hurt-by-their-offensive-lines'
+				}
+			]
 		};
 	},
 	computed: {
@@ -46,13 +60,13 @@ export default {
 	a {
 		display: block;
 		padding: .25rem;
-		
+
 		&:hover {
 			background: #f3f3f3;
 		}
 	}
 }
 .box.articles a {
-	display: block;
+	//display: block;
 }
 </style>

@@ -20,8 +20,8 @@
       <div class='column is-2' v-for="(p, i) in filteredPlayers">
         <div class='card'>
 					<div class='card-image' v-if="filteredPlayers.length <= 6">
-						<figure class='image is-4x5'>
-							<img alt='' :src="p.headshotx2">
+						<figure class='image is-45x60'>
+							<img alt='' :src="p.headshot">
 						</figure>
 					</div>
           <div class='card-content'>
@@ -80,7 +80,17 @@ export default {
 		}
 	}
 }
-.card-image figure.image {
-	background-color: #ccc;
+.card-image {
+	display: flex;
+	justify-content: center;
+
+	figure.image {
+		background-color: #ccc;
+
+		&.is-45x60 {
+			width: 45px;
+			height: 60px;
+		}
+	}
 }
 </style>

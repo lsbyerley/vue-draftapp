@@ -5,31 +5,32 @@
 		  <div class='modal-card'>
 		    <header class='modal-card-head'>
 		      <p class='modal-card-title'>Edit League Key</p>
-		      <button @click="modalOpen = false" class='delete'></button>
+		      <button @click="cancelModal" class='delete'></button>
 		    </header>
 		    <section class='modal-card-body'>
-		      <label class='label'>League Key</label>
+		      <label class='label'>League Key (Current: {{ league.meta.league_key }})</label>
 		      <p class='control'>
 		        <input class='input' :placeholder='league.meta.league_key' type='text' :model="tempKey">
 		      </p>
 		    </section>
 		    <footer class='modal-card-foot'>
 		      <a class='button is-primary modal-save' @click="updateLeague">Save changes</a>
-		      <a class='button modal-cancel' @click="modalOpen = false">Cancel</a>
+		      <a class='button modal-cancel' @click="cancelModal">Cancel</a>
 		    </footer>
 		  </div>
 		</div>
 		<div class='section profile-heading'>
+
 			<div class='columns is-mobile is-multiline'>
-				<div class='column is-2'>
+				<div class='column is-1'>
 					<span class='header-icon user-profile-image'>
 						<img v-if="league.meta.logo_url" :src="league.meta.logo_url">
-						<img v-if="!league.meta.logo_url" src="http://placehold.it/300x225">
+						<img v-if="!league.meta.logo_url" src="https://s.yimg.com/cv/api/default/20180206/default-league-logo@2x.png">
 					</span>
 				</div>
-				<div class='column is-4-tablet is-10-mobile name'>
+				<div class='column is-3-tablet is-10-mobile name'>
 					<p>
-						<span class='title is-bold'>{{ league.meta.name }}</span>
+						<span class='title is-4 is-bold'>{{ league.meta.name }}</span>
 						<br>
 						<a class='button is-primary is-outlined' href='#' id='edit-league-key' @click="modalOpen = true">
 							Edit League Key
@@ -37,22 +38,27 @@
 						<br>
 					</p>
 					<p class='tagline'>
-						League info and settings
+						<strong>League Key:</strong> {{ league.meta.league_key }}
 					</p>
-				</div>
-				<div class='column is-2-tablet is-4-mobile has-text-centered'>
-					<p class='stat-val'>{{ league.meta.num_teams }}</p>
-					<p class='stat-key'>teams</p>
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
 					<p class='stat-val'>{{ league.meta.season }}</p>
 					<p class='stat-key'>season</p>
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>{{ league.meta.num_teams }}</p>
+					<p class='stat-key'>teams</p>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
+					<p class='stat-val'>{{ rosterSpots }}</p>
+					<p class='stat-key'>roster spots</p>
+				</div>
+				<div class='column is-2-tablet is-4-mobile has-text-centered'>
 					<p class='stat-val' :class="draftStatusClass">{{ draftStatus }}</p>
 					<p class='stat-key'>draft status</p>
 				</div>
 			</div>
+
 		</div>
 		<div class='profile-options is-fullwidth'>
 			<div class='tabs is-fullwidth is-medium'>
@@ -125,11 +131,25 @@ export default {
 				'has-text-success': this.draftStatus === 'Live',
 				'has-text-info': this.draftStatus === 'Post'
 			}
+		},
+		rosterSpots() {
+			let spots = 0
+			if (this.league.settings.roster_positions) {
+				this.league.settings.roster_positions.forEach((pos) => {
+					spots += pos.count
+				})
+				return spots
+			}
+			return spots
 		}
 	},
 	methods: {
 		updateLeague() {
 			this.modalOpen = false
+		},
+		cancelModal() {
+			this.modalOpen = false
+			this.tempKey = ''
 		}
 	}
 }
@@ -142,7 +162,6 @@ export default {
 }
 .stat-val {
 	font-size: 2em;
-	padding-top: 20px;
 	font-weight: bold;
 }
 
@@ -170,7 +189,7 @@ export default {
 
 .profile-options .tabs ul li.link a {
 	//margin-bottom: 20px;
-	padding: 20px;
+	padding: .5rem;
 	background-color: #F1F1F1;
 }
 </style>
