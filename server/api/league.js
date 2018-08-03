@@ -2,7 +2,7 @@ const router = require('express').Router()
 const cache = require('../utils/cache')
 const request = require('request')
 
-router.get('/league', (req, res) => {
+router.get('/league', cache(300), (req, res) => {
 
 	const leagueKey = config.LEAGUE_KEY
 

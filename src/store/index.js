@@ -5,7 +5,7 @@ import find from 'lodash/find'
 import concat from 'lodash/concat'
 import orderBy from 'lodash/orderBy'
 import forEach from 'lodash/forEach'
-import { insertPlayerNote, insertPlayerProjections } from './utils/util'
+import { insertPlayerNote, insertPlayerProjections } from '../utils/util'
 
 Vue.use(Vuex)
 

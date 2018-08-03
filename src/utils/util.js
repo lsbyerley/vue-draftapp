@@ -78,7 +78,7 @@ export function insertPlayerNote(player) {
 	]
 
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {
-		player.note = 'Top OL'
+		player.note = 'OL+'
 	}
 
 	return player

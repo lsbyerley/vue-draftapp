@@ -58,7 +58,7 @@
 							</div>
 							<div class="level-right">
 								<div class="level-item" v-if="p.note">{{ p.note }}</div>
-								<div class="level-item" v-if="p.floor">FL: {{ p.floor }}</div>
+								<div class="level-item" v-if="p.floor">F: {{ p.floor }}</div>
 							</div>
 						</div>
 					</div>
