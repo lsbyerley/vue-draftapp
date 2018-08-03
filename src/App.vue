@@ -44,7 +44,7 @@ export default {
 			await this.$store.dispatch('getProjections');
 			await this.$store.dispatch('getPlayerPool');
 			await this.$store.dispatch('getDraftResults');
-			await this.$store.dispatch('getPlayerRankings');
+			await this.$store.dispatch('getRankings');
 			console.timeEnd('App Init')
 		}
 	}
