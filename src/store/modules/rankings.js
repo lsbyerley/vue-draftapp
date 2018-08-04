@@ -10,7 +10,7 @@ const rankings = {
 	},
 	actions: {
 		async getRankings({ commit, rootState }, payload) {
-			commit('setRankings', { isFetching: true });
+			commit('setFetchingRankings', { isFetching: true });
 
 			try {
 				const url = `https://jayzheng-ff-api.herokuapp.com/rankings?format=half_ppr`

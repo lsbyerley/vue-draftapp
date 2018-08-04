@@ -29,9 +29,7 @@ export default {
 		LeagueProfile
 	},
 	mounted() {
-		if (!this.leagueFetched) {
-			this.init()
-		}
+		this.init()
 	},
 	computed: {
 		...mapState(['authModalOpen'])
