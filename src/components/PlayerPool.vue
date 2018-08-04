@@ -10,16 +10,23 @@
 		  <div class="level-item has-text-centered">
 		    <div>
 					<div class="control">
-						<input v-model="search" class="input" type="text" placeholder="Search Player Pool">
+						<input v-model="search" class="input" type="text" placeholder="Search Players">
 					</div>
 		    </div>
 		  </div>
+			<div class="level-item has-text-centered">
+				<button class="button is-primary" @click="prevPage" :disabled="(pageNumber === 0)">Previous</button>
+				<button class="button is-primary" @click="nextPage" :disabled="(pageNumber >= pageCount -1)">Next</button>
+			</div>
+			<div class="level-item has-text-centered">
+				Page {{ pageNumber+1 }} of {{ pageCount }}
+			</div>
 		</div>
 
 		<div class='columns is-multiline'>
-      <div class='column is-2' v-for="(p, i) in filteredPlayers">
+      <div class='column is-2' v-for="(p, i) in paginatedData">
         <div class='card'>
-					<div class='card-image' v-if="filteredPlayers.length <= 6">
+					<div class='card-image' v-if="paginatedData.length <= 12">
 						<figure class='image is-45x60'>
 							<img alt='' :src="p.headshot">
 						</figure>
@@ -45,7 +52,9 @@ export default {
 	name: 'PlayerPool',
 	data() {
 		return {
-			search: ''
+			search: '',
+			pageNumber: 0,
+			size: 24
 		}
 	},
 	computed: {
@@ -54,13 +63,34 @@ export default {
       return this.playerPool.data.filter(p => {
 				return p.name.toLowerCase().includes(this.search.toLowerCase())
       })
-    }
+    },
+		pageCount(){
+			let l = this.filteredPlayers.length
+			let s = this.size
+			return Math.floor(l/s)
+		},
+		paginatedData(){
+			const start = this.pageNumber * this.size
+			const end = start + this.size;
+			return this.filteredPlayers.slice(start, end);
+		}
+	},
+	methods: {
+		nextPage(){
+			this.pageNumber++
+		},
+		prevPage(){
+			this.pageNumber--
+		}
 	}
 };
 </script>
 
 <style lang='scss'>
 .box.playerpool {
+	.button:nth-child(1) {
+		margin-right: 10px;
+	}
 	.card {
 		.card-content {
 			padding: 0;
