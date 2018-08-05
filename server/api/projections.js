@@ -7,7 +7,7 @@ router.get('/projections', cache(300), async (req, res) => {
 
 	try{
 
-		const positions = ['rb','wr']
+		const positions = ['rb','wr','qb','te']
 		let playerProjections = []
 
 		for (const pos of positions) {

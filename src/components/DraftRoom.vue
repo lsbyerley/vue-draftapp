@@ -44,6 +44,10 @@
 						<div class="level-item">{{ p.position }}</div>
 						<div class="level-item">{{ p.name }}</div>
 					</div>
+					<div class="level-right">
+						<div class="level-item" v-if="p.note">{{ p.note }}</div>
+						<div class="level-item" v-if="p.floor">F: {{ p.floor }}</div>
+					</div>
 				</div>
 			</div>
 			<div class='column is-6'>
@@ -82,6 +86,10 @@
 								<div class="level-item">Tier {{ p.tier }}</div>
 								<div class="level-item">{{ p.name }}</div>
 							</div>
+							<div class="level-right">
+								<div class="level-item" v-if="p.note">{{ p.note }}</div>
+								<div class="level-item" v-if="p.floor">F: {{ p.floor }}</div>
+							</div>
 						</div>
 					</div>
 					<div class='column is-half'>
@@ -90,6 +98,10 @@
 							<div class="level-left">
 								<div class="level-item">Tier {{ p.tier }}</div>
 								<div class="level-item">{{ p.name }}</div>
+							</div>
+							<div class="level-right">
+								<div class="level-item" v-if="p.note">{{ p.note }}</div>
+								<div class="level-item" v-if="p.floor">F: {{ p.floor }}</div>
 							</div>
 						</div>
 					</div>

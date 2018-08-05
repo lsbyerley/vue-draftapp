@@ -10,7 +10,7 @@ const passport = require('passport');
 const YahooFantasy = require('yahoo-fantasy');
 const helmet = require('helmet');
 const crossdomain = require('helmet-crossdomain');
-const config = require('./conf.js')
+const config = require('./config.js')
 const APP_KEY = process.env.APP_KEY || config.APP_KEY;
 const APP_SECRET = process.env.APP_SECRET || config.APP_SECRET;
 
