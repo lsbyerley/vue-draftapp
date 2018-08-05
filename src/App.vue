@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+		<Loading :active.sync="appLoading"></Loading>
 		<div class='modal' id='edit-preferences-modal' :class="{ 'is-active': authModalOpen }">
 		  <div class='modal-background'></div>
 		  <div class='modal-card'>
@@ -20,29 +21,33 @@
 </template>
 
 <script>
+import Loading from '@/components/Loading'
 import LeagueProfile from '@/components/LeagueProfile'
 import { mapState } from 'vuex'
 
 export default {
   name: 'app',
 	components: {
+		Loading,
 		LeagueProfile
 	},
 	mounted() {
 		this.init()
 	},
 	computed: {
-		...mapState(['authModalOpen'])
+		...mapState(['authModalOpen','appLoading'])
 	},
 	methods: {
 		async init() {
 			console.time('App Init')
+			this.$store.commit('setAppLoading', { loading: true })
 			await this.$store.dispatch('getLeague');
 			await this.$store.dispatch('getNews');
 			await this.$store.dispatch('getProjections');
 			await this.$store.dispatch('getPlayerPool');
 			await this.$store.dispatch('getDraftResults');
 			await this.$store.dispatch('getRankings');
+			this.$store.commit('setAppLoading', { loading: false })
 			console.timeEnd('App Init')
 		}
 	}

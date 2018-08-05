@@ -12,6 +12,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
+		appLoading: false,
 		authModalOpen: false
 	},
 	actions: {
@@ -20,6 +21,9 @@ const store = new Vuex.Store({
 	mutations: {
 		setAuthModal(state, payload) {
 			Vue.set(state, 'authModalOpen', payload.open)
+		},
+		setAppLoading(state, payload) {
+			Vue.set(state, 'appLoading', payload.loading)
 		}
 	},
 	getters: {
