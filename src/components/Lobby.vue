@@ -43,6 +43,18 @@ export default {
 				{
 					title: 'RBs helped/hurt by OLine',
 					link: 'https://www.profootballfocus.com/news/fantasy-football-running-backs-most-helped-and-hurt-by-their-offensive-lines'
+				},
+				{
+					title: 'Fantasy Pros Half-PPR rankings',
+					link: 'https://www.fantasypros.com/nfl/rankings/half-point-ppr-cheatsheets.php?filters=0fb547ca62'
+				},
+				{
+					title: 'PFF QB Tiers',
+					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-rankings-quarterback-tiers'
+				},
+				{
+					title: 'PFF RB Tiers',
+					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-rankings-running-back-tiers'
 				}
 			]
 		};

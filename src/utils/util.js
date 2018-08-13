@@ -77,8 +77,20 @@ export function insertPlayerNote(player) {
 		'San Francisco 49ers'
 	]
 
+	const wrTargets = [
+		
+	]
+
+	const rbTargets = [
+
+	]
+
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {
 		player.note = 'OL+'
+	}
+
+	if (wrTargets.includes(player.name) && player.position === 'WR') {
+		player.isTarget = true
 	}
 
 	return player
@@ -88,7 +100,7 @@ export function insertPlayerNote(player) {
 export function insertPlayerProjections(player, projections) {
 
 	let projection = find(projections, (p) => {
-		return player.name === p.name
+		return player.name === p.name || player.yahooPlayerName === p.name
 	})
 	if (projection) {
 		player.floor = projection.floor

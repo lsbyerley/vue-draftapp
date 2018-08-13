@@ -5,8 +5,8 @@
 				<h6 class="title is-6">Running Backs</h6>
 				<div class="level ranking" v-for='(p, i) in rbRankings' :class="tierClass(p.tier)">
 					<div class="level-left">
-						<div class="level-item">{{ i+1 }}</div>
-						<div class="level-item">Tier {{ p.tier }}</div>
+						<div class="level-item">{{ i+1 }} ({{ p.rank }})</div>
+						<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
 						<div class="level-item">{{ p.name }}</div>
 					</div>
 					<div class="level-right">
@@ -19,8 +19,8 @@
 				<h6 class="title is-6">Wide Receivers</h6>
 				<div class="level ranking" v-for='(p, i) in wrRankings' :class="tierClass(p.tier)">
 					<div class="level-left">
-						<div class="level-item">{{ i+1 }}</div>
-						<div class="level-item">Tier {{ p.tier }}</div>
+						<div class="level-item">{{ i+1 }} ({{ p.rank }})</div>
+						<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
 						<div class="level-item">{{ p.name }}</div>
 					</div>
 					<div class="level-right">
@@ -33,8 +33,8 @@
 				<h6 class="title is-6">Quarterbacks</h6>
 				<div class="level ranking" v-for='(p, i) in qbRankings' :class="tierClass(p.tier)">
 					<div class="level-left">
-						<div class="level-item">{{ i+1 }}</div>
-						<div class="level-item">Tier {{ p.tier }}</div>
+						<div class="level-item">{{ i+1 }} ({{ p.rank }})</div>
+						<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
 						<div class="level-item">{{ p.name }}</div>
 					</div>
 					<div class="level-right">
@@ -47,8 +47,8 @@
 				<h6 class="title is-6">Tight Ends</h6>
 				<div class="level ranking" v-for='(p, i) in teRankings' :class="tierClass(p.tier)">
 					<div class="level-left">
-						<div class="level-item">{{ i+1 }}</div>
-						<div class="level-item">Tier {{ p.tier }}</div>
+						<div class="level-item">{{ i+1 }} ({{ p.rank }})</div>
+						<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
 						<div class="level-item">{{ p.name }}</div>
 					</div>
 					<div class="level-right">

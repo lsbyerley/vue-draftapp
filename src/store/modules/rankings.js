@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import forEach from 'lodash/forEach'
+import find from 'lodash/find'
 import { insertPlayerNote, insertPlayerProjections } from '../../utils/util'
 
 const rankings = {
@@ -13,40 +14,50 @@ const rankings = {
 			commit('setFetchingRankings', { isFetching: true });
 
 			try {
-				const url = `https://jayzheng-ff-api.herokuapp.com/rankings?format=half_ppr`
+				const url = '/api/rankings'
 				const res = await axios.get(url)
 
+				//TODO: NEED TO MAKE THIS FASTER
 				console.time("Player Rankings: Adding Yahoo Player Key");
 				let foundCount = 0
-				let rankings = forEach(res.data.rankings, (ranking) => {
+				let rankings = forEach(res.data, (ranking) => {
 
 					if (ranking.name === 'Mitch Trubisky') //dumb name hack
 						ranking.name = 'Mitchell Trubisky'
 
-					let regex = RegExp(`${ranking.name}.*`,`i`)
-					forEach(rootState.playerPool.data, (yPlayer) => {
-						const yPlayerName = yPlayer.name
-						let found
+					let yPlayer = find(rootState.playerPool.data, (yp) => {
+						const yPlayerName = yp.name
+						let regexRank
+						let foundRank
+						let regexYahoo
+						let foundYahoo
 
-						if (ranking.position === 'DST') {
-							regex = RegExp(`${yPlayerName}.*`,`i`)
-							found = regex.test(ranking.name)
-						} else{
-							found = regex.test(yPlayerName);
+						regexRank = RegExp(`${ranking.name}.*`,`i`)
+						foundRank = regexRank.test(yPlayerName)
+						if (!foundRank) {
+							regexYahoo = RegExp(`${yPlayerName}.*`,`i`)
+							foundYahoo = regexYahoo.test(ranking.name)
 						}
 
-						if (found && (ranking.position === yPlayer.position || ranking.position === 'DST')) {
-							foundCount += 1
-							ranking.yahooPlayerKey = yPlayer.player_key
-							ranking.team = yPlayer.team
-							ranking = insertPlayerNote(ranking)
-							ranking = insertPlayerProjections(ranking, rootState.projections.data)
-							return false;
-						}
+						return (foundRank || foundYahoo) && (ranking.position === yp.position || ranking.position === 'DST')
 					})
 
+					if (yPlayer) {
+						foundCount += 1
+						ranking.yahooPlayerKey = yPlayer.player_key
+						ranking.yahooPlayerName = yPlayer.name
+						ranking.team = yPlayer.team
+						ranking = insertPlayerNote(ranking)
+						ranking = insertPlayerProjections(ranking, rootState.projections.data)
+					}
+
 				})
-				console.log('found count:'+foundCount)
+				console.log('found count:'+foundCount, 'total rankings: '+rankings.length)
+				forEach(rankings, (r) => {
+					if (!r.yahooPlayerKey) {
+						console.log(r.name)
+					}
+				})
 				console.timeEnd("Player Rankings: Adding Yahoo Player Key");
 
 				commit('setRankings', { rankings: rankings });

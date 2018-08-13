@@ -13,7 +13,7 @@
 		    </section>
 		  </div>
 		</div>
-	  <div class='container'>
+	  <div class='container is-fluid'>
 			<LeagueProfile />
 			<router-view/>
 		</div>

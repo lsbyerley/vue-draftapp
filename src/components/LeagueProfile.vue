@@ -50,7 +50,7 @@
 					<p class='stat-key'>teams</p>
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
-					<p class='stat-val'>{{ rosterSpots }}</p>
+					<p class='stat-val'>{{ draftResults.rosterSpots }}</p>
 					<p class='stat-key'>roster spots</p>
 				</div>
 				<div class='column is-2-tablet is-4-mobile has-text-centered'>
@@ -77,6 +77,14 @@
 								<i class='fa fa-list'></i>
 							</span>
 							<span>Draft Room</span>
+						</a>
+					</router-link>
+					<router-link class="link" tag="li" to="/draftapp/draftboard" active-class="is-active" exact>
+						<a>
+							<span class='icon'>
+								<i class='fa fa-list'></i>
+							</span>
+							<span>Draft Board</span>
 						</a>
 					</router-link>
 					<router-link class="link" tag="li" to="/draftapp/rankings" active-class="is-active" exact>
@@ -131,16 +139,6 @@ export default {
 				'has-text-success': this.draftStatus === 'Live',
 				'has-text-info': this.draftStatus === 'Post'
 			}
-		},
-		rosterSpots() {
-			let spots = 0
-			if (this.league.settings.roster_positions) {
-				this.league.settings.roster_positions.forEach((pos) => {
-					spots += pos.count
-				})
-				return spots
-			}
-			return spots
 		}
 	},
 	methods: {

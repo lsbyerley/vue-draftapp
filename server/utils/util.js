@@ -101,7 +101,43 @@ function formatRSSObj(json) {
 	return rss;
 }
 
+const abbrev_teams = {
+  'SEA': 'Seattle Seahawks',
+  'CAR': 'Carolina Panthers',
+  'ARZ': 'Arizona Cardinals',
+  'DEN': 'Denver Broncos',
+  'LAR': 'Los Angeles Rams',
+  'HST': 'Houston Texans',
+  'KC': 'Kansas City Chiefs',
+  'CIN': 'Cincinnati Bengals',
+  'NE': 'New England Patriots',
+  'MIN': 'Minnesota Vikings',
+  'NYJ': 'New York Jets',
+  'PHI': 'Philadelphia Eagles',
+  'GB': 'Green Bay Packers',
+  'BUF': 'Buffalo Bills',
+  'PIT': 'Pittsburgh Steelers',
+  'BLT': 'Baltimore Ravens',
+  'OAK': 'Oakland Raiders',
+  'JAX': 'Jacksonville Jaguars',
+  'MIA': 'Miami Dolphins',
+  'DET': 'Detroit Lions',
+  'TEN': 'Tennessee Titans',
+  'CLV': 'Cleveland Browns',
+  'SF': 'San Francisco 49ers',
+  'NYG': 'New York Giants',
+  'CHI': 'Chicago Bears',
+  'TB': 'Tampa Bay Buccaneers',
+  'WAS': 'Washington Redskins',
+  'ATL': 'Atlanta Falcons',
+  'LAC': 'Los Angeles Chargers',
+  'IND': 'Indianapolis Colts',
+  'NO': 'New Orleans Saints',
+  'DAL': 'Dallas Cowboys'
+}
+
 module.exports = {
 	fileExists,
-	formatRSSObj
+	formatRSSObj,
+	abbrev_teams
 };

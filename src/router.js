@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Lobby from '@/components/Lobby'
 import DraftRoom from '@/components/DraftRoom'
+import DraftBoard from '@/components/DraftBoard'
 import PlayerPool from '@/components/PlayerPool'
 import Rankings from '@/components/Rankings'
 
@@ -24,6 +25,11 @@ const router = new Router({
 			path: '/draftapp/draftroom',
 			name: 'DraftRoom',
 			component: DraftRoom
+		},
+		{
+			path: '/draftapp/draftboard',
+			name: 'DraftBoard',
+			component: DraftBoard
 		},
 		{
 			path: '/draftapp/playerpool',

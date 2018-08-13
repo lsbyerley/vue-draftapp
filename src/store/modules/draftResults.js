@@ -7,6 +7,7 @@ const draftResults = {
 	state: {
 		isFetching: false,
 		draftStatus: '',
+		rosterSpots: 0,
 		totalPicks: 0,
 		totalRounds: 0,
 		overallPick: 0,
@@ -23,9 +24,14 @@ const draftResults = {
 				const res = await axios.get('/api/draftresults')
 
 				const draftResults = res.data.draft_results
+				let rosterSpots = 0
+				rootState.league.settings.roster_positions.forEach((pos) => {
+					rosterSpots += pos.count
+				})
+				let totalTeams = parseInt(rootState.league.settings.max_teams)
 				let resultsWithPick = []
-				let totalPicks = draftResults.length
-				let totalRounds = (totalPicks / rootState.league.settings.max_teams)
+				let totalPicks = rosterSpots * totalTeams
+				let totalRounds = (totalPicks / totalTeams)
 				let overallPick = 1
 				let currentRound = 1
 				let currentPick = 1
@@ -56,6 +62,7 @@ const draftResults = {
 				commit('setDraftResults', {
 					results: resultsWithPick,
 					draftStatus: res.data.draft_status,
+					rosterSpots,
 					totalPicks,
 					totalRounds,
 					overallPick,
@@ -78,6 +85,7 @@ const draftResults = {
 		setDraftResults(state, payload) {
 			Vue.set(state, 'data', payload.results)
 			Vue.set(state, 'draftStatus', payload.draftStatus)
+			Vue.set(state, 'rosterSpots', payload.rosterSpots)
 			Vue.set(state, 'totalPicks', payload.totalPicks)
 			Vue.set(state, 'totalRounds', payload.totalRounds)
 			Vue.set(state, 'overallPick', payload.overallPick)
