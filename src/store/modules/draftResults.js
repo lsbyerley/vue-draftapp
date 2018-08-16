@@ -61,7 +61,7 @@ const draftResults = {
 				console.timeEnd('Draft Results: Matching Player Keys')
 
 				commit('setDraftResults', {
-					results: resultsWithPick,
+					data: resultsWithPick,
 					draftStatus: res.data.draft_status,
 					rosterSpots,
 					totalPicks,

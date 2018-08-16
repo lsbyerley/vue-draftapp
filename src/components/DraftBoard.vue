@@ -65,7 +65,7 @@ export default {
 	components: { DraftStats },
 	mounted() {
 		if (this.draftResults.draftStatus === 'draft') {
-			console.log('POLLING ON MOUNT')
+			console.log('FETCH DRAFT RESULTS ON MOUNT')
 			this.$store.dispatch('getDraftResults')
 		}
 		this.shouldWePoll()
