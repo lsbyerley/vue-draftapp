@@ -1,27 +1,4 @@
 import find from 'lodash/find'
-//import forEach from 'lodash/forEach'
-
-// cleaner but way slower when called from the store
-/*export function matchRankingWithYPlayer(ranking, yPlayerPool) {
-
-	if (ranking.name === 'Mitch Trubisky') //dumb name hack
-		ranking.name = 'Mitchell Trubisky'
-
-	const foundYPlayer = find(yPlayerPool, (yp) => {
-
-	  if (ranking.position === 'DST') {
-	    const yRegex = RegExp(`${yp.name}.*`,`i`)
-	    return yRegex.test(ranking.name)
-	  } else {
-	    const rankingRegex = RegExp(`${ranking.name}.*`,`i`)
-	    return rankingRegex.test(yp.name) && ranking.position === yp.position
-	  }
-
-	})
-
-	return foundYPlayer
-
-}*/
 
 export const team_abbrevs = {
     'Seattle Seahawks': 'SEA',
@@ -74,19 +51,28 @@ export function insertPlayerNote(player) {
 		'New England Patriots',
 		'Washington Redskins',
 		'Chicago Bears',
-		'San Francisco 49ers'
+		'Cleveland Browns',
+		'Jacksonville Jaguars',
+		'San Francisco 49ers',
+		'Indianapolis Colts',
+		'Kansas City Chiefs',
+		'Denver Broncos'
 	]
 
 	const wrTargets = [
-		
+		// More Coming
 	]
 
 	const rbTargets = [
-
+		// More Coming
 	]
 
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {
 		player.note = 'OL+'
+	}
+
+	if (rbTargets.includes(player.name) && player.position === 'RB') {
+		player.isTarget = true
 	}
 
 	if (wrTargets.includes(player.name) && player.position === 'WR') {

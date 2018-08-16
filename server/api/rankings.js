@@ -28,8 +28,17 @@ router.get('/rankings', cache(300), async (req, res) => {
 				name = abbrev_teams[rank['Team']]
 			}
 
+			let pffId = rank['Id']
+			let pffUrl
+			let idTokens = pffId.split('-')
+			if (idTokens.length === 3 && position !== 'DST') {
+				pffId = idTokens[2]
+				pffUrl = `https://www.profootballfocus.com/nfl/id/player/${pffId}`
+			}
+
 			rankings.push({
-				id: rank['Id'],
+				id: pffId,
+				url: pffUrl,
 				name: name,
 				team: rank['Team'],
 				bye: rank['Bye'],
