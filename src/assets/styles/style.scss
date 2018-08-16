@@ -10,7 +10,11 @@ body {
 	background: #F5F7FA
 }
 
-.draftroom, .rankings {
+.no-draft-results{
+	text-align: center;
+}
+
+.draftroom, .rankings, .draftboard {
 	.title {
 		background: #eee;
 		margin-bottom: .5rem;

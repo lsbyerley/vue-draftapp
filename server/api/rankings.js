@@ -44,7 +44,7 @@ router.get('/rankings', cache(300), async (req, res) => {
 				adp: rank['ADP']
 			})
 
-			if (i > 250)
+			if (i >= 199)
 				return false
 		})
 

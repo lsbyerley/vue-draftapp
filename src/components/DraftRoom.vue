@@ -1,38 +1,7 @@
 <template>
 	<div class='box draftroom'>
 
-		<div class="level draft-stats">
-		  <div class="level-item has-text-centered">
-		    <div>
-		      <p class="heading">Total Rounds</p>
-		      <p class="title">{{ draftResults.totalRounds }}</p>
-		    </div>
-		  </div>
-		  <div class="level-item has-text-centered">
-		    <div>
-		      <p class="heading">Total Picks</p>
-		      <p class="title">{{ draftResults.totalPicks }}</p>
-		    </div>
-		  </div>
-		  <div class="level-item has-text-centered">
-		    <div>
-		      <p class="heading">Overall Pick</p>
-		      <p class="title">{{ draftResults.overallPick }}</p>
-		    </div>
-		  </div>
-			<div class="level-item has-text-centered">
-		    <div>
-		      <p class="heading">Current Round</p>
-		      <p class="title">{{ draftResults.currentRound }}</p>
-		    </div>
-		  </div>
-			<div class="level-item has-text-centered">
-		    <div>
-		      <p class="heading">Current Pick</p>
-		      <p class="title">{{ draftResults.currentPick }}</p>
-		    </div>
-		  </div>
-		</div>
+		<DraftStats />
 
 		<div class='columns'>
 			<div class='column is-3 scrollable'>
@@ -50,7 +19,7 @@
 					</div>
 				</div>
 			</div>
-			<div class='column is-7'>
+			<div class='column'>
 				<h6 class="title is-6">Top Picks By Position</h6>
 				<div class='columns is-multiline'>
 					<div class='column is-half'>
@@ -117,8 +86,9 @@
 					</div>
 				</div>
 			</div>
-			<div class='column is-2'>
+			<div class='column is-3'>
 				<h6 class="title is-6">Draft Results</h6>
+				<div class="no-draft-results" v-if="draftResults.data.length === 0"><p>No Results Yet</p></div>
 				<div class="level draft-pick" v-for='draftPick in draftResultsReversed' :key="draftPick.player.player_key">
 					<div class="level-left">
 						<div class="level-item">{{ draftPick.pick }}</div>
@@ -135,15 +105,17 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import find from 'lodash/find'
+import DraftStats from '@/components/DraftStats'
 
 export default {
   name: 'DraftRoom',
+	components: { DraftStats },
 	mounted() {
-		this.shouldWePoll()
 		if (this.draftResults.draftStatus === 'draft') {
 			console.log('POLLING ON MOUNT')
 			this.$store.dispatch('getDraftResults')
 		}
+		this.shouldWePoll()
 	},
 	beforeDestroy() {
 		if (this.timer) {
@@ -245,13 +217,5 @@ export default {
 .column.scrollable {
 	overflow-y: auto;
 	height: 850px;
-}
-.level.draft-stats{
-	border-top: 1px solid #ddd;
-	margin: 0;
-	font-size: 13px;
-	padding: .5rem 0 .25rem 0;
-	border-bottom: 1px solid #ddd;
-	margin-bottom: 1.25rem;
 }
 </style>

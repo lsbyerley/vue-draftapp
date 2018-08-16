@@ -2,6 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import find from 'lodash/find'
 import forEach from 'lodash/forEach'
+import forOwn from 'lodash/forOwn'
 
 const draftResults = {
 	state: {
@@ -77,20 +78,17 @@ const draftResults = {
 				commit('setFetchingLeague', { isFetching: false });
 				if (err.response && err.response.status === 401) {
 					commit('setAuthModal', { open: true })
+				} else if (err.response && err.response.status === 500) {
+					commit('setDraftResults', { draftStatus: 'postdraft' })
 				}
 			}
 		}
 	},
 	mutations: {
 		setDraftResults(state, payload) {
-			Vue.set(state, 'data', payload.results)
-			Vue.set(state, 'draftStatus', payload.draftStatus)
-			Vue.set(state, 'rosterSpots', payload.rosterSpots)
-			Vue.set(state, 'totalPicks', payload.totalPicks)
-			Vue.set(state, 'totalRounds', payload.totalRounds)
-			Vue.set(state, 'overallPick', payload.overallPick)
-			Vue.set(state, 'currentRound', payload.currentRound)
-			Vue.set(state, 'currentPick', payload.currentPick)
+			forOwn(payload, (value, key) => {
+				Vue.set(state, key, value)
+			})
 		},
 		setFetchingDraftResults(state, payload) {
 			Vue.set(state, 'isFetching', payload.isFetching)

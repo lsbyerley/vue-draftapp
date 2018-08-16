@@ -13,7 +13,7 @@
 		    </section>
 		  </div>
 		</div>
-	  <div class='container is-fluid'>
+	  <div class='container is-fluid' v-if="!appLoading">
 			<LeagueProfile />
 			<router-view/>
 		</div>

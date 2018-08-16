@@ -1,38 +1,54 @@
 <template>
 	<div class='box draftboard'>
 
-		<div class="columns">
-			<div class="column is-1">RND</div>
-			<div class="column">QB</div>
-			<div class="column">RB</div>
-			<div class="column">WR</div>
-			<div class="column">TE</div>
-			<div class="column">Defense</div>
-		</div>
+		<DraftStats />
 
-		<div class="columns round" v-for="round in draftResults.totalRounds" :key="round">
-			<div class="column is-1">{{ round }}</div>
-			<div class="column">
-				<ul class="rankings qb">
-					<li class="ranking" v-for="p in roundPlayers(round,'QB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
-				</ul>
+		<div class="columns">
+			<div class="column is-9">
+				<div class="columns">
+					<div class="column is-1"><h6 class="title is-6">RND</h6></div>
+					<div class="column"><h6 class="title is-6">QB</h6></div>
+					<div class="column"><h6 class="title is-6">RB</h6></div>
+					<div class="column"><h6 class="title is-6">WR</h6></div>
+					<div class="column"><h6 class="title is-6">TE</h6></div>
+					<div class="column"><h6 class="title is-6">DEF</h6></div>
+				</div>
+				<div class="columns round" v-for="round in draftResults.totalRounds" :key="round">
+					<div class="column is-1 round"><p class="title is-6">{{ round }}</p></div>
+					<div class="column">
+						<ul class="rankings qb">
+							<li class="ranking" v-for="p in roundPlayers(round,'QB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
+						</ul>
+					</div>
+					<div class="column">
+						<ul class="rankings rb">
+							<li class="ranking" v-for="p in roundPlayers(round,'RB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
+						</ul>
+					</div>
+					<div class="column">
+						<ul class="rankings wr">
+							<li class="ranking" v-for="p in roundPlayers(round,'WR')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
+						</ul>
+					</div>
+					<div class="column">
+						<ul class="rankings te">
+							<li class="ranking" v-for="p in roundPlayers(round,'TE')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
+						</ul>
+					</div>
+					<div class="column"></div>
+				</div>
 			</div>
-			<div class="column">
-				<ul class="rankings rb">
-					<li class="ranking" v-for="p in roundPlayers(round,'RB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
-				</ul>
+			<div class='column is-3'>
+				<h6 class="title is-6">Draft Results</h6>
+				<div class="no-draft-results" v-if="draftResults.data.length === 0"><p>No Results Yet</p></div>
+				<div class="level draft-pick" v-for='draftPick in draftResultsReversed' :key="draftPick.player.player_key">
+					<div class="level-left">
+						<div class="level-item">{{ draftPick.pick }}</div>
+						<div class="level-item">{{ draftPick.player.name }}</div>
+						<div class="level-item">{{ draftPick.player.position }}</div>
+					</div>
+				</div>
 			</div>
-			<div class="column">
-				<ul class="rankings wr">
-					<li class="ranking" v-for="p in roundPlayers(round,'WR')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
-				</ul>
-			</div>
-			<div class="column">
-				<ul class="rankings te">
-					<li class="ranking" v-for="p in roundPlayers(round,'TE')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
-				</ul>
-			</div>
-			<div class="column"></div>
 		</div>
 
   </div>
@@ -41,14 +57,24 @@
 <script>
 import { mapState } from 'vuex'
 import forEach from 'lodash/forEach'
+import find from 'lodash/find'
+import DraftStats from '@/components/DraftStats'
 
 export default {
   name: 'DraftBoard',
+	components: { DraftStats },
 	mounted() {
-		this.shouldWePoll()
 		if (this.draftResults.draftStatus === 'draft') {
 			console.log('POLLING ON MOUNT')
 			this.$store.dispatch('getDraftResults')
+		}
+		this.shouldWePoll()
+	},
+	beforeDestroy() {
+		if (this.timer) {
+			console.log('Killing Draft Polling')
+			clearInterval(this.timer);
+			this.isPolling = false
 		}
 	},
 	data () {
@@ -86,36 +112,23 @@ export default {
 	methods: {
 		roundPlayers(currentRound, position) {
 			let roundRankings = []
-			if (this.draftRankings.length > 0) {
-				const maxPlayersPerRound = 12 //this.league.settings.max_teams
-				const totalPicks = this.draftResults.totalPicks
+			const maxPlayersPerRound = parseInt(this.league.settings.max_teams)
+			const totalPicks = this.draftResults.totalPicks
+			let rankMin = 1
+			let rankMax = maxPlayersPerRound
 
-				let rankMin = 1
-				let rankMax = parseInt(this.league.settings.max_teams)
-
-				if (currentRound !== 1) {
-					for (var i = 2; i <= currentRound; i++) {
-						//console.log(i, rankMin, rankMax, currentRound, maxPlayersPerRound)
-						rankMin += maxPlayersPerRound
-						rankMax += maxPlayersPerRound
-					}
-				} else {
-					//console.log('FIRSTROUND', i, rankMin, rankMax, currentRound, maxPlayersPerRound)
+			if (currentRound !== 1) {
+				for (var i = 2; i <= currentRound; i++) {
+					rankMin += maxPlayersPerRound
+					rankMax += maxPlayersPerRound
 				}
-
-				//console.log('CurrRound: '+currentRound,'Pos: '+ position, 'RankMin: '+rankMin+' RankMax: '+rankMax)
-				console.log('RankMin: '+rankMin+' RankMax: '+rankMax)
-
-				forEach(this.draftRankings, (player) => {
-					if (player.rank >= rankMin && player.rank <= rankMax && player.position === position) {
-						roundRankings.push(player)
-					}
-					//if (roundRankings.length >= maxPlayersPerRound)
-						//return false;
-				})
-				console.log('Round '+currentRound, 'TOTAL '+position+' '+roundRankings.length)
-				//console.log('-----------------------')
 			}
+
+			forEach(this.draftRankings, (player) => {
+				if (player.rank >= rankMin && player.rank <= rankMax && player.position === position) {
+					roundRankings.push(player)
+				}
+			})
 
 			return roundRankings
 
@@ -163,6 +176,24 @@ export default {
 ul.rankings {
 	li.ranking {
 		font-size: 12px;
+
+		&.not-drafted {
+			color: green;
+		}
+		&.is-drafted {
+			text-decoration: line-through;
+			color: red;
+		}
+	}
+}
+.column.round {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.title {
+		background: transparent;
+		font-size: 2rem;
 	}
 }
 </style>
