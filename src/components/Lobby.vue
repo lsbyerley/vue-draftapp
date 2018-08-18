@@ -54,7 +54,15 @@ export default {
 				},
 				{
 					title: 'PFF RB Tiers',
-					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-rankings-running-back-tiers'
+					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-ranking-the-fantasy-rbs-by-tier'
+				},
+				{
+					title: 'PFF WR Tiers',
+					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-ranking-the-fantasy-wrs-by-tier'
+				},
+				{
+					title: 'PFF TE Tiers',
+					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-ranking-the-fantasy-tes-by-tier'
 				}
 			]
 		};

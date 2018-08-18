@@ -1,5 +1,5 @@
 <template>
-	<div class="level draft-stats">
+	<div class="level draft-stats sticky">
 		<div class="level-item has-text-centered">
 			<div>
 				<p class="heading">Total Rounds</p>
@@ -52,5 +52,12 @@ export default {
 	padding: .5rem 0 .25rem 0;
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 1.25rem;
+
+	&.sticky {
+		position: -webkit-sticky;
+		position: sticky;
+		background: #fff;
+		top: 0;
+	}
 }
 </style>

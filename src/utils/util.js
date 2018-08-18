@@ -89,6 +89,7 @@ export function insertPlayerProjections(player, projections) {
 		return player.name === p.name || player.yahooPlayerName === p.name
 	})
 	if (projection) {
+		player.ceiling = projection.ceiling
 		player.floor = projection.floor
 	}
 

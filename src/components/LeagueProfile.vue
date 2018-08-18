@@ -31,7 +31,6 @@
 				<div class='column is-3-tablet is-10-mobile name'>
 					<p>
 						<span class='title is-4 is-bold'>{{ league.meta.name }}</span>
-						<br>
 						<a class='button is-primary is-outlined' href='#' id='edit-league-key' @click="modalOpen = true">
 							Edit League Key
 						</a>

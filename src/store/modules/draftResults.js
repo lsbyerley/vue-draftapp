@@ -54,10 +54,6 @@ const draftResults = {
 						}
 					}
 				})
-				/*console.log('Total Picks', totalPicks)
-				console.log('Total Rounds', totalRounds)
-				console.log('Overall Pick', overallPick)
-				console.log('Current Round', currentRound)*/
 				console.timeEnd('Draft Results: Matching Player Keys')
 
 				commit('setDraftResults', {
@@ -79,7 +75,7 @@ const draftResults = {
 				if (err.response && err.response.status === 401) {
 					commit('setAuthModal', { open: true })
 				} else if (err.response && err.response.status === 500) {
-					commit('setDraftResults', { draftStatus: 'postdraft' })
+					commit('setDraftResults', { draftStatus: 'N/A' })
 				}
 			}
 		}

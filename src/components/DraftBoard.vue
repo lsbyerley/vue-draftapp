@@ -11,31 +11,31 @@
 					<div class="column"><h6 class="title is-6">RB</h6></div>
 					<div class="column"><h6 class="title is-6">WR</h6></div>
 					<div class="column"><h6 class="title is-6">TE</h6></div>
-					<div class="column"><h6 class="title is-6">DEF</h6></div>
+					<!--<div class="column"><h6 class="title is-6">DEF</h6></div>-->
 				</div>
 				<div class="columns round" v-for="round in draftResults.totalRounds" :key="round">
-					<div class="column is-1 round"><p class="title is-6">{{ round }}</p></div>
+					<div class="column is-1 round" :class="roundClass(round)"><p class="title is-6">{{ round }}</p></div>
 					<div class="column">
 						<ul class="rankings qb">
-							<li class="ranking" v-for="p in roundPlayers(round,'QB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
+							<li class="ranking" v-for="p in roundPlayers(round,'QB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})</li>
 						</ul>
 					</div>
 					<div class="column">
 						<ul class="rankings rb">
-							<li class="ranking" v-for="p in roundPlayers(round,'RB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
+							<li class="ranking" v-for="p in roundPlayers(round,'RB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})</li>
 						</ul>
 					</div>
 					<div class="column">
 						<ul class="rankings wr">
-							<li class="ranking" v-for="p in roundPlayers(round,'WR')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
+							<li class="ranking" v-for="p in roundPlayers(round,'WR')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})</li>
 						</ul>
 					</div>
 					<div class="column">
 						<ul class="rankings te">
-							<li class="ranking" v-for="p in roundPlayers(round,'TE')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }}</li>
+							<li class="ranking" v-for="p in roundPlayers(round,'TE')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})</li>
 						</ul>
 					</div>
-					<div class="column"></div>
+					<!--<div class="column"></div>-->
 				</div>
 			</div>
 			<div class='column is-3'>
@@ -64,10 +64,10 @@ export default {
   name: 'DraftBoard',
 	components: { DraftStats },
 	mounted() {
-		if (this.draftResults.draftStatus === 'draft') {
-			console.log('FETCH DRAFT RESULTS ON MOUNT')
+		//if (this.draftResults.draftStatus === 'draft') {
+			//console.log('FETCH DRAFT RESULTS ON MOUNT')
 			this.$store.dispatch('getDraftResults')
-		}
+		//}
 		this.shouldWePoll()
 	},
 	beforeDestroy() {
@@ -110,6 +110,11 @@ export default {
 		}
 	},
 	methods: {
+		roundClass(round) {
+			return {
+	      'current-round':  (this.draftResults.currentRound == round),
+	    }
+		},
 		roundPlayers(currentRound, position) {
 			let roundRankings = []
 			const maxPlayersPerRound = parseInt(this.league.settings.max_teams)
@@ -190,6 +195,13 @@ ul.rankings {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	&.current-round {
+		background: green;
+		.title {
+			color: #fff;
+		}
+	}
 
 	.title {
 		background: transparent;
