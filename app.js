@@ -45,6 +45,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.locals.env = process.env.NODE_ENV
 global.yf = new YahooFantasy(APP_KEY, APP_SECRET);
 global.config = config
 global.__basedir = __dirname;

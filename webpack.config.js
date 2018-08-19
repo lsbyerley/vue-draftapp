@@ -3,12 +3,14 @@ var webpack = require('webpack')
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 var LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
+var filename = (process.env.NODE_ENV === 'production') ? 'build.js' : 'bundle.js'
+
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './public'),
     publicPath: '/public/',
-    filename: 'build.js'
+    filename: filename
   },
 	resolve: {
     alias: {

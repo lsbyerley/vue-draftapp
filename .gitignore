@@ -1,6 +1,8 @@
 config.js
 dump.rdb
+public/bundle.js
 public/build.js
+public/build.js.map
 
 .DS_Store
 node_modules/

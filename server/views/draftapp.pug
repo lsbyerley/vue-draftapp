@@ -2,4 +2,7 @@ extends layout
 
 block content
 	div#draftapp
-	script(src='/build.js')
+	if (env==='development')
+		script(src='/bundle.js')
+	if (env==='production')
+		script(src='/build.js')
