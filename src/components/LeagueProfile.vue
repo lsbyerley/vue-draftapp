@@ -1,5 +1,9 @@
 <template>
 	<div class='league-profile'>
+		<article class="message is-danger" v-if="league.errorFetching">
+		  <div class="message-header"><p>Error Fetching League</p></div>
+		  <div class="message-body">Please check the league key and try again</div>
+		</article>
 		<div class='modal' id='edit-preferences-modal' :class="{ 'is-active': modalOpen }">
 		  <div class='modal-background'></div>
 		  <div class='modal-card'>

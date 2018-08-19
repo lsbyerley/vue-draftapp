@@ -49,6 +49,10 @@ export default {
 					link: 'https://www.fantasypros.com/nfl/rankings/half-point-ppr-cheatsheets.php?filters=0fb547ca62'
 				},
 				{
+					title: 'PFF Ultimate Draftboard',
+					link: 'https://www.profootballfocus.com/news/fantasy-football-the-draft-board-to-end-all-draft-boards-jeff-ratcliffes-2018-fantasy-breakdown'
+				},
+				{
 					title: 'PFF QB Tiers',
 					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-rankings-quarterback-tiers'
 				},
@@ -58,11 +62,11 @@ export default {
 				},
 				{
 					title: 'PFF WR Tiers',
-					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-ranking-the-fantasy-wrs-by-tier'
+					link: 'https://www.profootballfocus.com/news/2018-fantasy-football-rankings-wide-receiver-tiers'
 				},
 				{
 					title: 'PFF TE Tiers',
-					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-ranking-the-fantasy-tes-by-tier'
+					link: 'https://www.profootballfocus.com/news/fantasy-football-2018-rankings-tight-end-tiers'
 				}
 			]
 		};

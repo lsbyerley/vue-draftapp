@@ -27,7 +27,9 @@ const draftResults = {
 				const draftResults = res.data.draft_results
 				let rosterSpots = 0
 				rootState.league.settings.roster_positions.forEach((pos) => {
-					rosterSpots += pos.count
+					if (pos.position !== 'IR') {
+						rosterSpots += pos.count
+					}
 				})
 				let totalTeams = parseInt(rootState.league.settings.max_teams)
 				let resultsWithPick = []

@@ -17,10 +17,12 @@ router.get('/projections', cache(300), async (req, res) => {
 			projectionRows.each((i, element) => {
 
 				const children = $(element).children()
-				const playerName = $(children[0]).find('a.player-name').text()
+				let playerName = $(children[0]).find('a.player-name').text()
 				const projection = $(children[children.length-1]).attr('data-sort-value')
 				const playerFloor = $(children[children.length-1]).find('div.min-cell').text()
 				const playerCeiling = $(children[children.length-1]).find('div.max-cell').text()
+
+				if (playerName === 'Devante Parker'){ playerName = 'DeVante Parker' }
 
 				playerProjections.push({
 					name: playerName,

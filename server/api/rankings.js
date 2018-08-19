@@ -28,6 +28,13 @@ router.get('/rankings', cache(300), async (req, res) => {
 				name = abbrev_teams[rank['Team']]
 			}
 
+			// Name Affixes: III, II, Jr., Sr., V (Will Fuller V)
+			const affixes = RegExp(`(\\sIII|\\sII|\\sV$|\\sIV|\\sJr\.|\\sSr\.)`)
+			foundAffix = affixes.test(name)
+			if (foundAffix) {
+				name = name.replace(affixes, '')
+			}
+
 			let pffId = rank['Id']
 			let pffUrl
 			let idTokens = pffId.split('-')

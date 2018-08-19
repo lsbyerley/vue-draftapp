@@ -4,8 +4,11 @@ import axios from 'axios'
 const league = {
 	state: {
 		isFetching: false,
+		errorFetching: false,
 		meta: {},
-		settings: {}
+		settings: {
+			roster_positions: []
+		}
 	},
 	actions: {
 		async getLeague({ commit }, payload) {
@@ -21,6 +24,8 @@ const league = {
 				commit('setFetchingLeague', { isFetching: false });
 				if (err.response && err.response.status === 401) {
 					commit('setAuthModal', { open: true })
+				} else if (err.response && err.reponse.status === 500) {
+					commit('setErrorFetching', { error: true })
 				}
 			}
 		}
@@ -32,6 +37,9 @@ const league = {
 		},
 		setFetchingLeague(state, payload) {
 			Vue.set(state, 'isFetching', payload.isFetching);
+		},
+		setErrorFetching(state, payload) {
+			Vue.sete(state, 'errorFetching', payload.error)
 		}
 	},
 	getters: {
