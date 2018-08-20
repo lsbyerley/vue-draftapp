@@ -46,12 +46,13 @@ export default {
 
 <style lang="scss">
 .level.draft-stats{
-	border-top: 1px solid #ddd;
 	margin: 0;
 	font-size: 13px;
 	padding: .5rem 0 .25rem 0;
-	border-bottom: 1px solid #ddd;
 	margin-bottom: 1.25rem;
+	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+	border-top: 0;
+	border-bottom: 0;
 
 	&.sticky {
 		position: -webkit-sticky;

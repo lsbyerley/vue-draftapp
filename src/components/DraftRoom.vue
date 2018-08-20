@@ -1,105 +1,107 @@
 <template>
-	<div class='box draftroom'>
-
+	<div class="draftroom">
 		<DraftStats />
+		<div class='box draftroom'>
 
-		<div class='columns'>
-			<div class='column is-3 scrollable'>
-				<h6 class="title is-6">Overall Rankings</h6>
-				<div class="level ranking" v-for='p in overallRankings' :class="rankingClass(p)" :key="p.id">
-					<div class="level-left">
-						<div class="level-item">{{ p.rank }}</div>
-						<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
-						<div class="level-item">{{ p.position }}</div>
-						<div class="level-item">{{ p.name }}</div>
-					</div>
-					<div class="level-right">
-						<div class="level-item" v-if="p.note">{{ p.note }}</div>
-						<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
-					</div>
-				</div>
-			</div>
-			<div class='column'>
-				<h6 class="title is-6">Top Picks By Position</h6>
-				<div class='columns is-multiline'>
-					<div class='column is-half'>
-						<h6 class="subtitle is-6">Running Backs</h6>
-						<div class="level ranking" v-for="p in rbRankings" :class="rankingClass(p)" :key="p.rank">
-							<div class="level-left">
-								<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
-								<div class="level-item">{{ p.name }}</div>
-							</div>
-							<div class="level-right">
-								<div class="level-item" v-if="p.note">{{ p.note }}</div>
-								<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
-							</div>
+			<div class='columns'>
+				<div class='column is-3 scrollable'>
+					<h6 class="title is-6">Overall Rankings</h6>
+					<div class="level ranking" v-for='p in overallRankings' :class="rankingClass(p)" :key="p.id">
+						<div class="level-left">
+							<div class="level-item">{{ p.rank }}</div>
+							<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
+							<div class="level-item">{{ p.position }}</div>
+							<div class="level-item">{{ p.name }}</div>
 						</div>
-					</div>
-					<div class='column is-half'>
-						<h6 class="subtitle is-6">Wide Receivers</h6>
-						<div class="level ranking" v-for="p in wrRankings" :class="rankingClass(p)" :key="p.rank">
-							<div class="level-left">
-								<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
-								<div class="level-item">{{ p.name }}</div>
-							</div>
-							<div class="level-right">
-								<div class="level-item" v-if="p.isTarget">(T)</div>
-								<div class="level-item" v-if="p.note">{{ p.note }}</div>
-								<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
-							</div>
-						</div>
-					</div>
-					<div class='column is-half'>
-						<h6 class="subtitle is-6">Quarterbacks</h6>
-						<div class="level ranking" v-for="p in qbRankings" :class="rankingClass(p)" :key="p.rank">
-							<div class="level-left">
-								<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
-								<div class="level-item">{{ p.name }}</div>
-							</div>
-							<div class="level-right">
-								<div class="level-item" v-if="p.note">{{ p.note }}</div>
-								<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
-							</div>
-						</div>
-					</div>
-					<div class='column is-half'>
-						<h6 class="subtitle is-6">Tight Ends</h6>
-						<div class="level ranking" v-for="p in teRankings" :class="rankingClass(p)" :key="p.rank">
-							<div class="level-left">
-								<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
-								<div class="level-item">{{ p.name }}</div>
-							</div>
-							<div class="level-right">
-								<div class="level-item" v-if="p.note">{{ p.note }}</div>
-								<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
-							</div>
-						</div>
-					</div>
-					<div class='column is-half'>
-						<h6 class="subtitle is-6">Defense</h6>
-						<div class="level ranking" v-for="p in dstRankings" :class="rankingClass(p)" :key="p.id">
-							<div class="level-left">
-								<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
-								<div class="level-item">{{ p.name }}</div>
-							</div>
+						<div class="level-right">
+							<div class="level-item" v-if="p.note">{{ p.note }}</div>
+							<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class='column is-3'>
-				<h6 class="title is-6">Draft Results</h6>
-				<div class="no-draft-results" v-if="draftResults.data.length === 0"><p>No Results Yet</p></div>
-				<div class="level draft-pick" v-for='draftPick in draftResultsReversed' :key="draftPick.player.player_key">
-					<div class="level-left">
-						<div class="level-item">{{ draftPick.pick }}</div>
-						<div class="level-item">{{ draftPick.player.name }}</div>
-						<div class="level-item">{{ draftPick.player.position }}</div>
+				<div class='column'>
+					<h6 class="title is-6">Top Picks By Position</h6>
+					<div class='columns is-multiline'>
+						<div class='column is-half'>
+							<h6 class="subtitle is-6">Running Backs</h6>
+							<div class="level ranking" v-for="p in rbRankings" :class="rankingClass(p)" :key="p.rank">
+								<div class="level-left">
+									<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
+									<div class="level-item">{{ p.name }}</div>
+								</div>
+								<div class="level-right">
+									<div class="level-item" v-if="p.note">{{ p.note }}</div>
+									<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+								</div>
+							</div>
+						</div>
+						<div class='column is-half'>
+							<h6 class="subtitle is-6">Wide Receivers</h6>
+							<div class="level ranking" v-for="p in wrRankings" :class="rankingClass(p)" :key="p.rank">
+								<div class="level-left">
+									<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
+									<div class="level-item">{{ p.name }}</div>
+								</div>
+								<div class="level-right">
+									<div class="level-item" v-if="p.isTarget">(T)</div>
+									<div class="level-item" v-if="p.note">{{ p.note }}</div>
+									<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+								</div>
+							</div>
+						</div>
+						<div class='column is-half'>
+							<h6 class="subtitle is-6">Quarterbacks</h6>
+							<div class="level ranking" v-for="p in qbRankings" :class="rankingClass(p)" :key="p.rank">
+								<div class="level-left">
+									<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
+									<div class="level-item">{{ p.name }}</div>
+								</div>
+								<div class="level-right">
+									<div class="level-item" v-if="p.note">{{ p.note }}</div>
+									<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+								</div>
+							</div>
+						</div>
+						<div class='column is-half'>
+							<h6 class="subtitle is-6">Tight Ends</h6>
+							<div class="level ranking" v-for="p in teRankings" :class="rankingClass(p)" :key="p.rank">
+								<div class="level-left">
+									<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
+									<div class="level-item">{{ p.name }}</div>
+								</div>
+								<div class="level-right">
+									<div class="level-item" v-if="p.note">{{ p.note }}</div>
+									<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+								</div>
+							</div>
+						</div>
+						<div class='column is-half'>
+							<h6 class="subtitle is-6">Defense</h6>
+							<div class="level ranking" v-for="p in dstRankings" :class="rankingClass(p)" :key="p.id">
+								<div class="level-left">
+									<div class="level-item">({{ p.rank }})</div>
+									<div class="level-item" v-if="p.tier">Tier {{ p.tier }}</div>
+									<div class="level-item">{{ p.name }}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class='column is-3'>
+					<h6 class="title is-6">Draft Results</h6>
+					<div class="no-draft-results" v-if="draftResults.data.length === 0"><p>No Results Yet</p></div>
+					<div class="level draft-pick" v-for='draftPick in draftResultsReversed' :key="draftPick.player.player_key">
+						<div class="level-left">
+							<div class="level-item">{{ draftPick.pick }}</div>
+							<div class="level-item">{{ draftPick.player.name }}</div>
+							<div class="level-item">{{ draftPick.player.position }}</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-  </div>
+	  </div>
+	</div>
 </template>
 
 <script>

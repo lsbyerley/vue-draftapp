@@ -1,57 +1,66 @@
 <template>
-	<div class='box draftboard'>
-
+	<div class="draftboard">
 		<DraftStats />
+		<div class='box'>
 
-		<div class="columns">
-			<div class="column is-9">
-				<div class="columns">
-					<div class="column is-1"><h6 class="title is-6">RND</h6></div>
-					<div class="column"><h6 class="title is-6">QB</h6></div>
-					<div class="column"><h6 class="title is-6">RB</h6></div>
-					<div class="column"><h6 class="title is-6">WR</h6></div>
-					<div class="column"><h6 class="title is-6">TE</h6></div>
-					<!--<div class="column"><h6 class="title is-6">DEF</h6></div>-->
+			<div class="columns">
+				<div class="column is-9">
+					<div class="columns">
+						<div class="column is-1"><h6 class="title is-6">RND</h6></div>
+						<div class="column"><h6 class="title is-6">QB</h6></div>
+						<div class="column"><h6 class="title is-6">RB</h6></div>
+						<div class="column"><h6 class="title is-6">WR</h6></div>
+						<div class="column"><h6 class="title is-6">TE</h6></div>
+						<!--<div class="column"><h6 class="title is-6">DEF</h6></div>-->
+					</div>
+					<div class="columns round" v-for="round in draftResults.totalRounds" :key="round">
+						<div class="column is-1 round" :class="roundClass(round)"><p class="title is-6">{{ round }}</p></div>
+						<div class="column">
+							<ul class="rankings qb">
+								<li class="ranking" v-for="p in roundPlayers(round,'QB')" :class="rankingClass(p)">
+									({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})
+								</li>
+							</ul>
+						</div>
+						<div class="column">
+							<ul class="rankings rb">
+								<li class="ranking" v-for="p in roundPlayers(round,'RB')" :class="rankingClass(p)">
+									({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})
+								</li>
+							</ul>
+						</div>
+						<div class="column">
+							<ul class="rankings wr">
+								<li class="ranking" v-for="p in roundPlayers(round,'WR')" :class="rankingClass(p)">
+									({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})
+								</li>
+							</ul>
+						</div>
+						<div class="column">
+							<ul class="rankings te">
+								<li class="ranking" v-for="p in roundPlayers(round,'TE')" :class="rankingClass(p)">
+									({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})
+								</li>
+							</ul>
+						</div>
+						<!--<div class="column"></div>-->
+					</div>
 				</div>
-				<div class="columns round" v-for="round in draftResults.totalRounds" :key="round">
-					<div class="column is-1 round" :class="roundClass(round)"><p class="title is-6">{{ round }}</p></div>
-					<div class="column">
-						<ul class="rankings qb">
-							<li class="ranking" v-for="p in roundPlayers(round,'QB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})</li>
-						</ul>
+				<div class='column is-3'>
+					<h6 class="title is-6">Draft Results</h6>
+					<div class="no-draft-results" v-if="draftResults.data.length === 0"><p>No Results Yet</p></div>
+					<div class="level draft-pick" v-for='draftPick in draftResultsReversed' :key="draftPick.player.player_key">
+						<div class="level-left">
+							<div class="level-item">{{ draftPick.pick }}</div>
+							<div class="level-item">{{ draftPick.player.name }}</div>
+							<div class="level-item">{{ draftPick.player.position }}</div>
+						</div>
 					</div>
-					<div class="column">
-						<ul class="rankings rb">
-							<li class="ranking" v-for="p in roundPlayers(round,'RB')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})</li>
-						</ul>
-					</div>
-					<div class="column">
-						<ul class="rankings wr">
-							<li class="ranking" v-for="p in roundPlayers(round,'WR')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})</li>
-						</ul>
-					</div>
-					<div class="column">
-						<ul class="rankings te">
-							<li class="ranking" v-for="p in roundPlayers(round,'TE')" :class="rankingClass(p)">({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})</li>
-						</ul>
-					</div>
-					<!--<div class="column"></div>-->
 				</div>
 			</div>
-			<div class='column is-3'>
-				<h6 class="title is-6">Draft Results</h6>
-				<div class="no-draft-results" v-if="draftResults.data.length === 0"><p>No Results Yet</p></div>
-				<div class="level draft-pick" v-for='draftPick in draftResultsReversed' :key="draftPick.player.player_key">
-					<div class="level-left">
-						<div class="level-item">{{ draftPick.pick }}</div>
-						<div class="level-item">{{ draftPick.player.name }}</div>
-						<div class="level-item">{{ draftPick.player.position }}</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
-  </div>
+	  </div>
+	</div>
 </template>
 
 <script>

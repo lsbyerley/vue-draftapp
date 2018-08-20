@@ -17,6 +17,13 @@
 			<LeagueProfile />
 			<router-view/>
 		</div>
+		<footer class="footer">
+		  <div class="content has-text-centered">
+		    <p>
+		      <strong>Vue DraftApp</strong> by <a href="https://twitter.com/lsbyerley">lsbyerley</a>
+		    </p>
+		  </div>
+		</footer>
   </div>
 </template>
 
@@ -56,5 +63,10 @@ export default {
 
 <style lang="scss">
 @import './assets/styles/style';
-
+.footer {
+	background: #ebeff5;
+	border-top: 1px solid rgba(10, 10, 10, 0.1);
+	padding: 3rem;
+	margin-top: 1rem;
+}
 </style>
