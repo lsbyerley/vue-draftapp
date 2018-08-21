@@ -60,11 +60,21 @@ export function insertPlayerNote(player) {
 	]
 
 	const wrTargets = [
-		// More Coming
+		"Adam Thielen",
+		"Randall Cobb",
+		"Emmanuel Sanders",
+		"Robby Anderson",
+		"D.J. Moore",
+		"Tyler Lockett",
+		"Anthony Miller",
+		"Marquise Goodwin"
 	]
 
 	const rbTargets = [
-		// More Coming
+		"Royce Freeman",
+		"Chris Thompson",
+		"Peyton Barber",
+		"Chris Carson"
 	]
 
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {
