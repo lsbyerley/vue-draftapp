@@ -60,21 +60,36 @@ export function insertPlayerNote(player) {
 	]
 
 	const wrTargets = [
+		"DeAndre Hopkins",
 		"Adam Thielen",
+		"Marvin Jones",
+		"Will Fuller",
+		"Chris Hogan",
+		"Allen Hurns",
 		"Randall Cobb",
 		"Emmanuel Sanders",
 		"Robby Anderson",
 		"D.J. Moore",
+		"Kenny Golladay",
 		"Tyler Lockett",
 		"Anthony Miller",
-		"Marquise Goodwin"
+		"Marquise Goodwin",
+		"Marqise Lee",
+		"Corey Davis"
 	]
 
 	const rbTargets = [
+		"Mark Ingram", //6th Round
 		"Royce Freeman",
+		"Rex Burkhead",
+		"Tevin Coleman",
+		"Kerryon Johnson",
 		"Chris Thompson",
 		"Peyton Barber",
-		"Chris Carson"
+		"Giovani Bernard",
+		"Chris Carson",
+		"James White",
+		"Bilal Powell"
 	]
 
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {
