@@ -174,7 +174,8 @@ export default {
 				'is-yellow': (player.tier % 4 === 2),
 				'is-blue': (player.tier % 4 === 3),
 				'is-drafted': (player.isDrafted),
-				'not-drafted': (!player.isDrafted)
+				'not-drafted': (!player.isDrafted),
+				'is-target': player.isTarget
 	    }
 	  },
 	}
@@ -193,6 +194,9 @@ ul.rankings {
 
 		&.not-drafted {
 			color: green;
+			&.is-target {
+				text-decoration: underline;
+			}
 		}
 		&.is-drafted {
 			text-decoration: line-through;
