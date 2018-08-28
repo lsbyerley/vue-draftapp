@@ -25,21 +25,21 @@
 						<div class="column">
 							<ul class="rankings rb">
 								<li class="ranking" v-for="p in roundPlayers(round,'RB')" :class="rankingClass(p)">
-									({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})
+									({{ p.rank }}) {{ p.name }} ({{ p.projPoints }})
 								</li>
 							</ul>
 						</div>
 						<div class="column">
 							<ul class="rankings wr">
 								<li class="ranking" v-for="p in roundPlayers(round,'WR')" :class="rankingClass(p)">
-									({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})
+									({{ p.rank }}) {{ p.name }} ({{ p.projPoints }})
 								</li>
 							</ul>
 						</div>
 						<div class="column">
 							<ul class="rankings te">
 								<li class="ranking" v-for="p in roundPlayers(round,'TE')" :class="rankingClass(p)">
-									({{ p.rank }}) {{ p.name }} ({{ p.ceiling }})
+									({{ p.rank }}) {{ p.name }} ({{ p.projPoints }})
 								</li>
 							</ul>
 						</div>

@@ -15,8 +15,8 @@ router.get('/rankings', cache(300), async (req, res) => {
 		return res.status(200).json(rankingsRes.data.rankings)*/
 
 		// ProFootballFocus Half PPR
-		// url of csv https://www.profootballfocus.com/fantasy/leagues/56541/draft_board?draft_options%5Branking_source_name%5D=NFL%202018%20.5%20PPR&draft_options%5Branker_name%5D=Jeff%20Ratcliffe&draft_options%5Bdisplay_mode%5D=Ranking&draft_options%5Bauction_budget%5D=200
-		const path = 'public/rankings/pff-half-ppr.csv'
+		// url of csv https://www.profootballfocus.com/fantasy/leagues/66213/draft_board
+		const path = 'public/rankings/league-export.csv'
 		const jsonObj = await csv().fromFile(path);
 		const rankings = []
 

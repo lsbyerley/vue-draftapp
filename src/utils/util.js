@@ -74,11 +74,13 @@ export function insertPlayerNote(player) {
 		"Tyler Lockett",
 		"Anthony Miller",
 		"Marquise Goodwin",
-		"Marqise Lee",
+		"Keelan Cole",
 		"Corey Davis"
 	]
 
 	const rbTargets = [
+		"Leonard Fournette",
+		"Jordan Howard",
 		"Mark Ingram", //6th Round
 		"Royce Freeman",
 		"Rex Burkhead",
@@ -89,7 +91,8 @@ export function insertPlayerNote(player) {
 		"Giovani Bernard",
 		"Chris Carson",
 		"James White",
-		"Bilal Powell"
+		"Bilal Powell",
+		"Latavius Murray"
 	]
 
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {

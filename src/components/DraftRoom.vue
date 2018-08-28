@@ -15,7 +15,7 @@
 						</div>
 						<div class="level-right">
 							<div class="level-item" v-if="p.note">{{ p.note }}</div>
-							<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+							<div class="level-item" v-if="p.projPoints">{{ p.projPoints }}</div>
 						</div>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 								</div>
 								<div class="level-right">
 									<div class="level-item" v-if="p.note">{{ p.note }}</div>
-									<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+									<div class="level-item" v-if="p.projPoints">{{ p.projPoints }}</div>
 								</div>
 							</div>
 						</div>
@@ -45,7 +45,7 @@
 								<div class="level-right">
 									<div class="level-item" v-if="p.isTarget">(T)</div>
 									<div class="level-item" v-if="p.note">{{ p.note }}</div>
-									<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+									<div class="level-item" v-if="p.projPoints">{{ p.projPoints }}</div>
 								</div>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 								</div>
 								<div class="level-right">
 									<div class="level-item" v-if="p.note">{{ p.note }}</div>
-									<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+									<div class="level-item" v-if="p.projPoints">{{ p.projPoints }}</div>
 								</div>
 							</div>
 						</div>
@@ -71,7 +71,7 @@
 								</div>
 								<div class="level-right">
 									<div class="level-item" v-if="p.note">{{ p.note }}</div>
-									<div class="level-item" v-if="p.ceiling">C: {{ p.ceiling }}</div>
+									<div class="level-item" v-if="p.projPoints">{{ p.projPoints }}</div>
 								</div>
 							</div>
 						</div>
