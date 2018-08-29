@@ -75,7 +75,8 @@ export function insertPlayerNote(player) {
 		"Anthony Miller",
 		"Marquise Goodwin",
 		"Keelan Cole",
-		"Corey Davis"
+		"Corey Davis",
+		"Chris Godwin"
 	]
 
 	const rbTargets = [
@@ -93,7 +94,8 @@ export function insertPlayerNote(player) {
 		"James White",
 		"Bilal Powell",
 		"Latavius Murray",
-		"Jamaal Williams"
+		"Jamaal Williams",
+		"Adrian Peterson"
 	]
 
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {
