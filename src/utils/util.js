@@ -92,7 +92,8 @@ export function insertPlayerNote(player) {
 		"Chris Carson",
 		"James White",
 		"Bilal Powell",
-		"Latavius Murray"
+		"Latavius Murray",
+		"Jamaal Williams"
 	]
 
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {
