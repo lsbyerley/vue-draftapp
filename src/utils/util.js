@@ -76,7 +76,9 @@ export function insertPlayerNote(player) {
 		"Marquise Goodwin",
 		"Keelan Cole",
 		"Corey Davis",
-		"Chris Godwin"
+		"Chris Godwin",
+		"John Ross",
+		"Chris Godwin",
 	]
 
 	const rbTargets = [
@@ -89,13 +91,14 @@ export function insertPlayerNote(player) {
 		"Kerryon Johnson",
 		"Chris Thompson",
 		"Peyton Barber",
-		"Giovani Bernard",
 		"Chris Carson",
 		"James White",
 		"Bilal Powell",
 		"Latavius Murray",
 		"Jamaal Williams",
-		"Adrian Peterson"
+		"Adrian Peterson",
+		"James Conner",
+		"Michael Gallup"
 	]
 
 	if (topOLineTeams.includes(player.team) && player.position === 'RB') {
