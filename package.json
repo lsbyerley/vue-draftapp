@@ -54,6 +54,6 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.13.1",
     "xml2js": "^0.4.19",
-    "yahoo-fantasy": "^3.0.3"
+    "yahoo-fantasy": "^3.0.4"
   }
 }
