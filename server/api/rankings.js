@@ -16,6 +16,7 @@ router.get('/rankings', cache(300), async (req, res) => {
 
 		// ProFootballFocus Half PPR
 		// url of csv https://www.profootballfocus.com/fantasy/leagues/66213/draft_board
+		// https://www.pff.com/fantasy/cheat_sheets?scoring=88711&draft_options%5Branking_source_name%5D=Redraft%20.5%20PPR&draft_options%5Branker_name%5D=Consensus&draft_options%5Bdisplay_mode%5D=rank&draft_options%5Bauction_budget%5D=200&draft_options%5Bsheet_format%5D=draft_board
 		const path = 'public/rankings/league-export.csv'
 		const jsonObj = await csv().fromFile(path);
 		const rankings = []
